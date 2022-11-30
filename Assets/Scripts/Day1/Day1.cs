@@ -19,9 +19,11 @@ public class Day1 : MonoBehaviour
 
     void ParseInput()
     {
-        string day = "Day1";
+        string day = nameof(Day1);
+
         string path = $"Assets/Scripts/{day}/input.txt";
         string content = File.ReadAllText(path);
+
         Debug.Log(content);
     }
 }
