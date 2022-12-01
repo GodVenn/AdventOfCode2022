@@ -46,7 +46,7 @@ namespace Assets.Scripts.Day1
 
             foreach (var elf in elves)
             {
-                elf.Score -= 10;
+                elf.Score -= 100;
             }
 
         }
@@ -63,7 +63,7 @@ namespace Assets.Scripts.Day1
 
         private Elf SpawnElf(int elfCalories)
         {
-            Vector3 pos = new Vector3(-10 + currentElfCount*2, -2.56f, 0);
+            Vector3 pos = new Vector3(-10 + currentElfCount*2, -3.56f, 0);
             Elf elf = Instantiate(ElfPrefab, pos, Quaternion.identity).GetComponent<Elf>();
             elf.Score = elfCalories;
             currentElfCount++;
