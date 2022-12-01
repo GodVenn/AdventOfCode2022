@@ -9,20 +9,14 @@ namespace Assets.Scripts.Day1
 {
     public class Day1 : MonoBehaviour
     {
-        List<int> elves = new List<int>();
+        public List<int> Elves = new List<int>();
 
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
             ParseInput();
-            int topThreeMax = elves.OrderByDescending(x => x).Take(3).Sum(x => x);
+            int topThreeMax = Elves.OrderByDescending(x => x).Take(3).Sum(x => x);
             Debug.Log(topThreeMax);
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-
         }
 
         void ParseInput()
@@ -33,17 +27,17 @@ namespace Assets.Scripts.Day1
             string[] lines = File.ReadAllLines(path);
 
             int currentElf = 0;
-            elves.Add(0);
+            Elves.Add(0);
             foreach (string line in lines)
             {
                 if (string.IsNullOrEmpty(line))
                 {
                     currentElf++;
-                    elves.Add(0);
+                    Elves.Add(0);
                 }
                 else
                 {
-                    elves[currentElf] += int.Parse(line);
+                    Elves[currentElf] += int.Parse(line);
                 }
             }
 
