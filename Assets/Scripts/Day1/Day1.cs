@@ -1,29 +1,53 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering.UI;
 
-public class Day1 : MonoBehaviour
+namespace Assets.Scripts.Day1
 {
-    // Start is called before the first frame update
-    void Start()
+    public class Day1 : MonoBehaviour
     {
-        ParseInput();
+        List<int> elves = new List<int>();
+
+        // Start is called before the first frame update
+        void Start()
+        {
+            ParseInput();
+            int topThreeMax = elves.OrderByDescending(x => x).Take(3).Sum(x => x);
+            Debug.Log(topThreeMax);
+        }
+
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
+
+        void ParseInput()
+        {
+            string day = nameof(Day1);
+
+            string path = $"Assets/Scripts/{day}/input.txt";
+            string[] lines = File.ReadAllLines(path);
+
+            int currentElf = 0;
+            elves.Add(0);
+            foreach (string line in lines)
+            {
+                if (string.IsNullOrEmpty(line))
+                {
+                    currentElf++;
+                    elves.Add(0);
+                }
+                else
+                {
+                    elves[currentElf] += int.Parse(line);
+                }
+            }
+
+        }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    void ParseInput()
-    {
-        string day = nameof(Day1);
-
-        string path = $"Assets/Scripts/{day}/input.txt";
-        string content = File.ReadAllText(path);
-
-        Debug.Log(content);
-    }
 }
