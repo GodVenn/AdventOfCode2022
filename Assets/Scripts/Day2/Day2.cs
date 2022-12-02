@@ -9,7 +9,7 @@ namespace Assets.Scripts.Day2
 {
     internal class Day2 : MonoBehaviour
     {
-        Dictionary<char, int> scores = new() { { 'X', 1 }, { 'Y', 2 }, { 'Z', 3 } };
+        Dictionary<char, int> scores = new() { { 'A', 1 }, { 'B', 2 }, { 'C', 3 } };
 
         private void Start()
         {
@@ -27,18 +27,32 @@ namespace Assets.Scripts.Day2
             foreach (string line in lines)
             {
                 char enemyChoice = line[0];
-                enemyChoice += (char)23;
-                char myChoice = line[2];
-                Debug.Log(enemyChoice + " vs " + myChoice);
-                score += scores[myChoice];
+                char result = line[2];
 
-                if (myChoice == enemyChoice)
+
+                char myChoice;
+                if (result == 'Y')
+                {
                     score += 3;
-                else if (myChoice == 'X' && enemyChoice == 'Z' || myChoice == 'Y' && enemyChoice == 'X' || myChoice == 'Z' && enemyChoice == 'Y')
+                    myChoice = enemyChoice;
+                }
+                else if (result == 'Z')
+                {
                     score += 6;
+                    myChoice = (char)(enemyChoice + 1);
+                    if (myChoice > 'C')
+                        myChoice = 'A';
+                }
+                else
+                {
+                    myChoice = (char)(enemyChoice - 1);
+                    if (myChoice < 'A')
+                        myChoice = 'C';
+                }
 
-                Debug.Log(score);
+                score += scores[myChoice];
             }
+            Debug.Log(score);
 
         }
     }
